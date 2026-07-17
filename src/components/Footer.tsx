@@ -11,32 +11,45 @@ export default function Footer() {
   const [isLocationsOpen, setIsLocationsOpen] = useState(false);
 
   return (
-    <footer className="w-full bg-[#0a0a0b] text-white border-t border-zinc-900">
+    <footer className="w-full bg-black text-white border-t border-zinc-900">
       
       {/* 1. CTA Section */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24 text-center flex flex-col items-center">
-        <h2 className="text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] font-black tracking-tight leading-none mb-8 sm:mb-10 max-w-4xl select-none">
-          Ready To Start <br />
-          <span className="text-[#0052e0]">Your Next Campaign?</span>
-        </h2>
-        
-        <Link
-          href="/contact"
-          className="inline-flex items-center justify-center bg-white text-slate-950 font-bold px-10 py-4.5 rounded-full hover:bg-slate-100 transition-colors duration-200 text-base"
-        >
-          Let&apos;s Get Started
-        </Link>
-      </div>
+      <div className="relative w-full border-b border-zinc-900 bg-black overflow-hidden py-24 sm:py-28">
+        {/* Background Image Layer */}
+        <div className="absolute inset-0 z-0 opacity-55">
+          <Image
+            src="/images/cta_background_texture.png"
+            alt="Dark digital network background"
+            fill
+            sizes="100vw"
+            className="object-cover pointer-events-none select-none"
+          />
+          {/* Subtle gradient to fade into solid black at borders */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        </div>
 
-      {/* Divider */}
-      <div className="w-full border-t border-zinc-900"></div>
+        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center flex flex-col items-center z-10">
+          <h2 className="text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] font-black tracking-tight leading-none mb-8 sm:mb-10 max-w-4xl select-none">
+            Ready To Start <br />
+            <span className="text-[#f59e0b]">Your Next Campaign?</span>
+          </h2>
+          
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold px-10 py-4.5 rounded-full shadow-lg shadow-[#f59e0b]/10 hover:shadow-xl hover:shadow-[#f59e0b]/20 transition-all duration-200 text-base"
+          >
+            Let&apos;s Get Started
+          </Link>
+        </div>
+      </div>
 
       {/* 2. Main Footer Link Grid */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 gap-8 md:gap-6 items-start">
           
           {/* Column 1: Brand Info (4 cols width on desktop) */}
-          <div className="lg:col-span-4 flex flex-col items-start gap-5">
+          <div className="lg:col-span-4 flex flex-col items-start gap-6">
             {/* Logo */}
             <div className="flex items-center">
               <Image
@@ -48,19 +61,19 @@ export default function Footer() {
               />
             </div>
 
-            {/* Address & Hours */}
-            <div className="flex flex-col gap-3.5 text-sm text-zinc-400 font-medium w-full">
-              <p className="hover:text-white transition-colors duration-200">
-                <span className="font-bold text-zinc-300 block mb-0.5">Phone:</span>
-                (571) 370-3427
+            {/* Address & Hours Stacked Card */}
+            <div className="flex flex-col gap-5 text-sm text-zinc-400 font-medium w-full">
+              <p className="flex flex-col gap-1">
+                <span className="text-xs font-black uppercase tracking-wider text-zinc-500">Phone</span>
+                <a href="tel:5713703427" className="text-white hover:text-[#f59e0b] transition-colors font-bold text-[15px]">(571) 370-3427</a>
               </p>
-              <p className="hover:text-white transition-colors duration-200">
-                <span className="font-bold text-zinc-300 block mb-0.5">Email:</span>
-                info@qualityresourcellc.com
+              <p className="flex flex-col gap-1">
+                <span className="text-xs font-black uppercase tracking-wider text-zinc-500">Email</span>
+                <a href="mailto:info@qualityresourcellc.com" className="text-white hover:text-[#f59e0b] transition-colors font-bold text-[15px]">info@qualityresourcellc.com</a>
               </p>
-              <p>
-                <span className="font-bold text-zinc-300 block mb-0.5">Hours:</span>
-                Monday - Friday 8:30 am - 5 pm
+              <p className="flex flex-col gap-1">
+                <span className="text-xs font-black uppercase tracking-wider text-zinc-500">Office Hours</span>
+                <span className="text-zinc-300 font-bold">Mon - Fri / 8:30 AM - 5:00 PM</span>
               </p>
             </div>
           </div>
@@ -85,12 +98,12 @@ export default function Footer() {
               }`}
             >
               <ul className="flex flex-col gap-2.5 text-sm text-zinc-400 font-medium">
-                <li><Link href="/about" className="hover:text-white transition-colors duration-200">About Us</Link></li>
-                <li><Link href="/portfolio" className="hover:text-white transition-colors duration-200">Portfolio</Link></li>
-                <li><Link href="/blog" className="hover:text-white transition-colors duration-200">Our Blog</Link></li>
-                <li><Link href="/awards" className="hover:text-white transition-colors duration-200">Our Awards</Link></li>
-                <li><Link href="/testimonials" className="hover:text-white transition-colors duration-200">Testimonials</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors duration-200">Contact Us</Link></li>
+                <li><Link href="/about" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">About Us</Link></li>
+                <li><Link href="/portfolio" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Portfolio</Link></li>
+                <li><Link href="/blog" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Our Blog</Link></li>
+                <li><Link href="/awards" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Our Awards</Link></li>
+                <li><Link href="/testimonials" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Testimonials</Link></li>
+                <li><Link href="/contact" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Contact Us</Link></li>
               </ul>
             </div>
           </div>
@@ -115,12 +128,12 @@ export default function Footer() {
               }`}
             >
               <ul className="flex flex-col gap-2.5 text-sm text-zinc-400 font-medium">
-                <li><Link href="/services/web-design" className="hover:text-white transition-colors duration-200">Web Design & Development</Link></li>
-                <li><Link href="/services/seo" className="hover:text-white transition-colors duration-200">Website SEO</Link></li>
-                <li><Link href="/services/local-maps" className="hover:text-white transition-colors duration-200">Local Maps Optimization</Link></li>
-                <li><Link href="/services/social-media" className="hover:text-white transition-colors duration-200">Social Media Marketing</Link></li>
-                <li><Link href="/services/ppc" className="hover:text-white transition-colors duration-200">PPC Management</Link></li>
-                <li><Link href="/services/app-dev" className="hover:text-white transition-colors duration-200">App Development</Link></li>
+                <li><Link href="/services/web-design" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Web Design & Dev</Link></li>
+                <li><Link href="/services/seo" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Website SEO</Link></li>
+                <li><Link href="/services/local-maps" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Local Maps Optimization</Link></li>
+                <li><Link href="/services/social-media" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Social Media Marketing</Link></li>
+                <li><Link href="/services/ppc" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">PPC Management</Link></li>
+                <li><Link href="/services/app-dev" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">App Development</Link></li>
               </ul>
             </div>
           </div>
@@ -165,7 +178,7 @@ export default function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded bg-white flex items-center justify-center text-slate-950 hover:bg-slate-100 transition-colors"
+                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#f59e0b] hover:border-[#f59e0b] hover:shadow-md hover:shadow-[#f59e0b]/5 transition-all duration-300"
                 aria-label="Facebook"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -176,7 +189,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded bg-white flex items-center justify-center text-slate-950 hover:bg-slate-100 transition-colors"
+                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#f59e0b] hover:border-[#f59e0b] hover:shadow-md hover:shadow-[#f59e0b]/5 transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -189,7 +202,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded bg-white flex items-center justify-center text-slate-950 hover:bg-slate-100 transition-colors"
+                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#f59e0b] hover:border-[#f59e0b] hover:shadow-md hover:shadow-[#f59e0b]/5 transition-all duration-300"
                 aria-label="Instagram"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -203,11 +216,10 @@ export default function Footer() {
             {/* Google Partner Badge */}
             <div className="flex flex-col items-start gap-2 mt-2">
               <span className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider select-none">
-                We&apos;re Google Partner!
+                Google Partner
               </span>
               
-              {/* Google Partner Card Badge SVG representation */}
-              <div className="w-[125px] h-[75px] bg-white rounded-lg flex flex-col items-center justify-center shadow-md border border-slate-200 select-none">
+              <div className="w-[125px] h-[75px] bg-zinc-950 rounded-xl flex flex-col items-center justify-center shadow-lg border border-zinc-800 select-none">
                 <div className="flex items-center gap-1.5 mb-1">
                   {/* Google G logo */}
                   <svg viewBox="0 0 24 24" className="w-4 h-4">
@@ -228,9 +240,9 @@ export default function Footer() {
                       fill="#EA4335"
                     />
                   </svg>
-                  <span className="text-[12px] font-bold text-slate-800 tracking-tight">Google</span>
+                  <span className="text-[12px] font-bold text-white tracking-tight">Google</span>
                 </div>
-                <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest leading-none">Partner</span>
+                <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest leading-none">Partner</span>
               </div>
             </div>
           </div>
@@ -245,9 +257,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-medium">
         <span>Quality Resource LLC © 2010 - 2026 All Rights Reserved.</span>
         <div className="flex gap-4">
-          <Link href="/terms" className="hover:text-zinc-300 transition-colors">Terms of Service</Link>
+          <Link href="/terms" className="hover:text-[#f59e0b] transition-colors">Terms of Service</Link>
           <span>•</span>
-          <Link href="/privacy" className="hover:text-zinc-300 transition-colors">Privacy Policy</Link>
+          <Link href="/privacy" className="hover:text-[#f59e0b] transition-colors">Privacy Policy</Link>
         </div>
       </div>
 

@@ -133,14 +133,14 @@ export default function About() {
   ];
 
   return (
-    <div ref={containerRef} className="w-full bg-[#0a0a0b] py-12 lg:py-16 overflow-hidden">
+    <div ref={containerRef} className="w-full bg-black py-12 lg:py-16 overflow-hidden">
       {/* 1. Large Scrolling Outline Header */}
       <div className="w-full overflow-hidden mb-10 sm:mb-12 select-none">
         <h2
           className="text-[64px] sm:text-[100px] md:text-[140px] lg:text-[170px] font-black tracking-tighter uppercase whitespace-nowrap transition-transform duration-75 ease-out"
           style={{
             transform: `translateX(${translateX}%)`,
-            WebkitTextStroke: "2.5px #0052e0",
+            WebkitTextStroke: "2.5px #f59e0b",
             color: "transparent",
           }}
         >
@@ -166,9 +166,9 @@ export default function About() {
               key={idx}
               numberNode={
                 <span
-                  className="text-7xl sm:text-8xl md:text-[96px] font-black leading-none select-none transition-all duration-300 group-hover:text-blue-600/10 group-hover:drop-shadow-[0_0_12px_rgba(0,82,224,0.5)]"
+                  className="text-7xl sm:text-8xl md:text-[96px] font-black leading-none select-none transition-all duration-300 group-hover:text-amber-500/10 group-hover:drop-shadow-[0_0_12px_rgba(245,158,11,0.5)]"
                   style={{
-                    WebkitTextStroke: "2.5px #0052e0",
+                    WebkitTextStroke: "2.5px #f59e0b",
                     color: "transparent",
                   }}
                 >
@@ -177,7 +177,7 @@ export default function About() {
               }
               contentNode={
                 <>
-                  <h3 className="text-2xl sm:text-3xl md:text-[30px] font-bold text-white leading-tight mb-2 tracking-tight transition-colors duration-300 group-hover:text-[#0052e0]">
+                  <h3 className="text-2xl sm:text-3xl md:text-[30px] font-bold text-white leading-tight mb-2 tracking-tight transition-colors duration-300 group-hover:text-[#f59e0b]">
                     {item.title}
                   </h3>
                   <p className="text-base sm:text-lg text-zinc-300 font-normal leading-relaxed transition-colors duration-300 group-hover:text-white">

@@ -1,120 +1,212 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { ChevronDown, Play, ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative w-full bg-white pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <section className="relative w-full bg-white pt-16 pb-24 lg:pt-24 lg:pb-36 overflow-hidden border-b border-slate-100">
+      
+      {/* Premium visible background grid mesh */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_80%,transparent_100%)] z-0 pointer-events-none select-none" />
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
-          {/* Left Column: Text & Content (Aligned to Center) */}
-          <div className="lg:col-span-7 flex flex-col items-center justify-center text-center z-10 w-full">
-            {/* Review Badge (with Google logo, black thin border, compact balanced sizes) */}
-            <div className="inline-flex items-center gap-x-2.5 sm:gap-x-4.5 border border-slate-900 rounded-full px-3.5 sm:px-6 py-2 sm:py-2.5 mb-10 bg-white shadow-sm select-none whitespace-nowrap">
-              <span className="flex items-center tracking-tight">
-                {/* Standard Google G Logo SVG */}
-                <svg viewBox="0 0 24 24" className="w-[15px] h-[15px] sm:w-[18px] sm:h-[18px]">
-                  <path
-                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                    fill="#4285F4"
-                  />
-                  <path
-                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                    fill="#34A853"
-                  />
-                  <path
-                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                    fill="#FBBC05"
-                  />
-                  <path
-                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                    fill="#EA4335"
-                  />
-                </svg>
-              </span>
-              <span className="h-4 w-px bg-slate-300"></span>
-              <span className="text-[#0047e1] text-[10px] sm:text-xs md:text-sm font-bold tracking-widest flex gap-0.5">
-                ★★★★★
-              </span>
-              <span className="text-slate-950 font-black text-[10px] sm:text-xs md:text-sm">
-                4.8 Rating
-              </span>
-              <span className="h-4 w-px bg-slate-300"></span>
-              <span className="text-slate-500 font-bold text-[10px] sm:text-xs md:text-sm">
-                715+ Reviews
-              </span>
-            </div>
+          
+          {/* Left Column: Text Content */}
+          <div className="lg:col-span-6 flex flex-col items-start text-left w-full">
+            
+            {/* Small Upper Tagline */}
+            <span className="text-xs sm:text-[13px] font-extrabold tracking-widest text-[#f59e0b] uppercase mb-5 select-none">
+              Digital Marketing That Delivers Results
+            </span>
 
-            {/* Cursive Overlap Title Container (Tighter margins and padding) */}
-            <div className="relative flex flex-col items-center justify-center w-full pt-12 sm:pt-16 md:pt-20 lg:pt-24 mb-8 select-none">
-              {/* Cursive text (Shifted slightly upward on all devices) */}
-              <span className="absolute -top-2 sm:-top-3 md:-top-4 lg:-top-6 font-cursive text-[72px] sm:text-[84px] md:text-[104px] lg:text-[124px] text-[#0052e0] z-20 whitespace-nowrap leading-none">
-                Innovative
-              </span>
-              {/* Main title */}
-              <h1 className="text-[54px] sm:text-[72px] md:text-[92px] lg:text-[108px] font-bold text-slate-950 leading-none tracking-tight -mt-3 sm:-mt-5 md:-mt-7">
-                Marketing
-              </h1>
-            </div>
+            {/* Main Title */}
+            <h1 className="text-[44px] sm:text-[58px] lg:text-[70px] font-black text-slate-950 leading-[1.08] tracking-tight mb-6">
+              We Grow Brands. <br />
+              You Grow <span className="text-[#f59e0b]">Revenue.</span>
+            </h1>
 
-            {/* Subtitle / Description (Consistent font-weights and sizes matching Pic 1) */}
-            <p className="max-w-[800px] text-[21px] sm:text-2xl md:text-[26px] lg:text-[30px] text-slate-950 font-bold leading-snug tracking-tight mb-10">
-              AI-Driven Digital Marketing Agency where creativity sparks, strategy fuels, & innovation{" "}
-              <span className="text-slate-400 font-bold">
-                transforms your business into a success story.
-              </span>
+            {/* Description */}
+            <p className="max-w-lg text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed font-medium mb-10">
+              Data-driven marketing strategies that generate leads, increase conversions, and scale your business sustainably.
             </p>
 
-            {/* Call to Action Button (Proportionate size and styling matching Pic 1) */}
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-4.5 rounded-full text-[15px] sm:text-base font-bold text-white bg-[#0047e1] hover:bg-[#003bc2] transition-all duration-300 transform hover:scale-[1.02] shadow-md"
-            >
-              Book Your Free Strategy Call Today
-            </Link>
-          </div>
+            {/* Buttons Row */}
+            <div className="flex flex-wrap items-center gap-5 sm:gap-6 w-full">
+              {/* Primary Black capsule button */}
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-slate-950 hover:bg-neutral-800 text-white font-bold px-8 py-4.5 rounded-full shadow-lg shadow-slate-950/15 transition-colors duration-200 text-sm sm:text-base group"
+              >
+                <span>Book a Free Strategy Call</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
 
-          {/* Right Column: Image Grid (Reduced by 25% on medium/large screens) */}
-          <div className="lg:col-span-5 w-full md:max-w-[360px] lg:max-w-[420px] md:mx-auto lg:mx-0 lg:ml-auto flex flex-col gap-5 sm:gap-6">
-            {/* Top Large Image (Height reduced by 25% on md/lg: 320px -> 240px) */}
-            <div className="relative w-full h-[260px] md:h-[240px] rounded-[32px] overflow-hidden shadow-sm group hover:shadow-md transition-shadow duration-300">
-              <Image
-                src="/images/presenting.png"
-                alt="Presentation in modern office"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
-              />
+              {/* Secondary Play button */}
+              <Link
+                href="/portfolio"
+                className="inline-flex items-center gap-3 text-slate-800 hover:text-[#f59e0b] font-bold text-sm sm:text-base transition-colors duration-200 group"
+              >
+                <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center bg-white shadow-sm group-hover:border-[#f59e0b]/40 group-hover:shadow-md transition-all shrink-0">
+                  <Play className="w-3.5 h-3.5 text-slate-900 fill-current ml-0.5" />
+                </div>
+                <span>See How We Help</span>
+              </Link>
             </div>
 
-            {/* Bottom Two Images */}
-            <div className="grid grid-cols-2 gap-5 sm:gap-6">
-              {/* Bottom Left Image (Height reduced by 25% on md/lg: 220px -> 165px) */}
-              <div className="relative h-[180px] md:h-[165px] rounded-[24px] overflow-hidden shadow-sm group hover:shadow-md transition-shadow duration-300">
-                <Image
-                  src="/images/handshake.png"
-                  alt="Business meeting handshake"
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 20vw"
-                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                />
+          </div>
+
+          {/* Right Column: Code-Based Dashboard Mockup Panel */}
+          <div className="lg:col-span-6 w-full flex justify-center lg:justify-end relative">
+            
+            {/* Main Dashboard Card */}
+            <div className="relative w-full max-w-[550px] bg-white border border-slate-100 rounded-[32px] p-5 sm:p-7 shadow-[0_20px_50px_rgba(15,23,42,0.08)] flex flex-col gap-6 z-10 select-none">
+              
+              {/* Card Header */}
+              <div className="flex items-center justify-between w-full">
+                <span className="text-sm sm:text-base font-bold text-slate-950">
+                  Performance Overview
+                </span>
+                
+                {/* Time selector bubble */}
+                <div className="px-3 py-1.5 border border-slate-100 rounded-lg text-xs font-bold text-slate-500 flex items-center gap-1">
+                  <span>This Month</span>
+                  <ChevronDown className="w-3 h-3 text-slate-400" />
+                </div>
               </div>
 
-              {/* Bottom Right Image (Height reduced by 25% on md/lg: 220px -> 165px) */}
-              <div className="relative h-[180px] md:h-[165px] rounded-[24px] overflow-hidden shadow-sm group hover:shadow-md transition-shadow duration-300">
-                <Image
-                  src="/images/creative_team.png"
-                  alt="Creative team workspace"
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 20vw"
-                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                />
+              {/* Metrics Stats row */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-b border-slate-100/60 pb-5">
+                {[
+                  { label: "Total Traffic", val: "24.5K", growth: "+18.6%" },
+                  { label: "Leads Gen", val: "1.2K", growth: "+24.3%" },
+                  { label: "Conversions", val: "356", growth: "+21.7%" },
+                  { label: "ROI", val: "320%", growth: "+29.4%" }
+                ].map((stat, idx) => (
+                  <div key={idx} className="flex flex-col items-start">
+                    <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                      {stat.label}
+                    </span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-base sm:text-lg font-black text-slate-950 leading-none">
+                        {stat.val}
+                      </span>
+                      <span className="text-[8px] sm:text-[9px] font-black text-emerald-500 bg-emerald-50/80 px-1 py-0.5 rounded">
+                        {stat.growth}
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
+
+              {/* Line Chart Container */}
+              <div className="relative w-full h-[140px] sm:h-[160px] overflow-visible">
+                
+                {/* SVG Area & Stroke curve */}
+                <svg viewBox="0 0 500 160" className="w-full h-full overflow-visible">
+                  <defs>
+                    <linearGradient id="gold-chart-grad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.25" />
+                      <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.0" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Grid Lines */}
+                  <line x1="0" y1="40" x2="500" y2="40" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="3 3" />
+                  <line x1="0" y1="80" x2="500" y2="80" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="3 3" />
+                  <line x1="0" y1="120" x2="500" y2="120" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="3 3" />
+
+                  {/* Gradient Area Path */}
+                  <path
+                    d="M 0 130 Q 80 120 120 90 T 250 80 T 380 50 T 500 30 L 500 160 L 0 160 Z"
+                    fill="url(#gold-chart-grad)"
+                    className="animate-fade-in-chart"
+                  />
+                  
+                  {/* Stroke Line Path */}
+                  <path
+                    d="M 0 130 Q 80 120 120 90 T 250 80 T 380 50 T 500 30"
+                    fill="none"
+                    stroke="#f59e0b"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    className="animate-draw-line"
+                  />
+
+                  {/* End highlight dot */}
+                  <circle cx="500" cy="30" r="5.5" fill="#f59e0b" className="animate-fade-in-chart" />
+                  
+                  {/* Mid Dot (representing tooltips state) */}
+                  <circle cx="380" cy="50" r="4.5" fill="#f59e0b" className="animate-fade-in-chart" />
+                </svg>
+
+                {/* Floating tooltip block aligned precisely at 76% horizontally */}
+                <div
+                  className="absolute bg-slate-950 text-white text-[9px] font-bold px-2.5 py-1.5 rounded-lg shadow-md z-20 flex flex-col items-center select-none -translate-x-1/2 animate-fade-in-chart"
+                  style={{
+                    left: "76%",
+                    top: "6px"
+                  }}
+                >
+                  <span>24.5K</span>
+                  <span className="text-slate-400 text-[7px] uppercase tracking-wider font-semibold">Total Traffic</span>
+                  {/* Chevron down arrow under tooltip */}
+                  <div className="w-1.5 h-1.5 bg-slate-950 rotate-45 absolute -bottom-0.5 left-1/2 -translate-x-1/2" />
+                </div>
+
+              </div>
+
+              {/* Chart Axis labels */}
+              <div className="flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-wider select-none px-1">
+                <span>Week 1</span>
+                <span>Week 2</span>
+                <span>Week 3</span>
+                <span>Week 4</span>
+                <span>Week 5</span>
+                <span>Week 6</span>
+              </div>
+
+              {/* Overlapping Bottom Donut Card (Hidden on mobile) */}
+              <div className="absolute bottom-[-30px] right-[-24px] bg-white border border-slate-100 rounded-2xl p-4 shadow-xl w-[205px] hidden sm:flex items-center gap-4 z-20 select-none">
+                
+                {/* SVG Donut */}
+                <svg viewBox="0 0 36 36" className="w-14 h-14 shrink-0">
+                  <circle cx="18" cy="18" r="15.915" fill="none" stroke="#f1f5f9" strokeWidth="3" />
+                  
+                  {/* Google Ads segment - 45% (Amber) */}
+                  <circle cx="18" cy="18" r="15.915" fill="none" stroke="#f59e0b" strokeWidth="4.5" strokeDasharray="45 55" strokeDashoffset="25" strokeLinecap="round" />
+                  
+                  {/* Meta Ads segment - 30% (Gold hover) */}
+                  <circle cx="18" cy="18" r="15.915" fill="none" stroke="#d97706" strokeWidth="4.5" strokeDasharray="30 70" strokeDashoffset="80" strokeLinecap="round" />
+                  
+                  {/* SEO segment - 15% (Light Gold) */}
+                  <circle cx="18" cy="18" r="15.915" fill="none" stroke="#fbbf24" strokeWidth="4.5" strokeDasharray="15 85" strokeDashoffset="110" strokeLinecap="round" />
+                </svg>
+
+                {/* Donut Legend */}
+                <div className="flex flex-col gap-1 text-[9px] font-bold text-slate-600">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#f59e0b]" />
+                    <span>Google Ads <span className="text-slate-400 font-medium ml-0.5">45%</span></span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#d97706]" />
+                    <span>Meta Ads <span className="text-slate-400 font-medium ml-0.5">30%</span></span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#fbbf24]" />
+                    <span>SEO <span className="text-slate-400 font-medium ml-0.5">15%</span></span>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
+
           </div>
+
         </div>
       </div>
     </section>

@@ -70,16 +70,16 @@ export default function Reviews() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0a0a0b] py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-zinc-900">
+    <section className="relative w-full bg-black py-20 sm:py-24 lg:py-28 overflow-hidden border-b border-zinc-900">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Header: Left title, Right description */}
-        <RevealContainer className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+        <RevealContainer className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16 sm:mb-20">
           {/* Left Title */}
           <div className="lg:col-span-6">
             <h2 className="text-3xl sm:text-4xl md:text-[50px] font-black text-white leading-tight tracking-tight">
               Real Reviews, <br />
-              <span className="text-[#0052e0]">Real Clients</span>
+              <span className="text-[#f59e0b]">Real Clients</span>
             </h2>
           </div>
           
@@ -101,55 +101,40 @@ export default function Reviews() {
               key={idx}
               className="w-[285px] sm:w-[320px] md:w-auto shrink-0 snap-center h-full flex"
             >
-              <div className="w-full bg-[#161617] rounded-[20px] p-6 sm:p-7 flex flex-col justify-between h-full border border-zinc-800/40 hover:border-zinc-700/80 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md">
+              <div className="w-full bg-zinc-950/70 border border-zinc-800/40 rounded-[20px] p-6 sm:p-8 flex flex-col justify-between h-full transition-all duration-300 hover:border-[#f59e0b]/30">
                 
                 {/* Header Content */}
                 <div className="w-full">
-                  <div className="flex items-start justify-between w-full mb-6">
+                  <div className="flex flex-col items-start w-full mb-5">
+                    
                     {/* User Info */}
-                    <div className="flex flex-col items-start">
-                      <span className="text-sm sm:text-base font-bold text-white tracking-tight">
-                        {review.name}
-                      </span>
-                      
-                      {/* Rating (Vibrant Blue Stars) */}
-                      <div className="flex gap-0.5 my-1.5">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <svg
-                            key={i}
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="w-3.5 h-3.5 text-[#0052e0]"
-                          >
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                          </svg>
-                        ))}
-                      </div>
-                      
-                      <span className="text-[11px] font-bold tracking-wider text-[#0052e0] uppercase">
-                        Clients
-                      </span>
+                    <span className="text-base font-bold text-white tracking-tight leading-none">
+                      {review.name}
+                    </span>
+                    
+                    {/* Rating (Amber Stars) */}
+                    <div className="flex gap-0.5 mt-2.5 mb-1.5 select-none">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <svg
+                          key={i}
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="w-3.5 h-3.5 text-[#f59e0b]"
+                        >
+                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                      ))}
                     </div>
 
-                    {/* Verified check badge */}
-                    <div className="text-white opacity-95">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-5 h-5"
-                      >
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
-                      </svg>
-                    </div>
+                    {/* Verified badge */}
+                    <span className="text-[10px] font-extrabold tracking-widest text-[#f59e0b] uppercase select-none">
+                      Verified Client
+                    </span>
+
                   </div>
 
                   {/* Review Text */}
-                  <p className="text-[13px] sm:text-sm text-zinc-300 leading-relaxed font-medium">
+                  <p className="text-[13.5px] text-zinc-300 leading-relaxed font-medium">
                     {review.text}
                   </p>
                 </div>

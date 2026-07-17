@@ -23,6 +23,61 @@
   }
 }
 
+/* Custom slow-floating animation for icons */
+@keyframes slow-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes slow-float-reverse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 600;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in-chart {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slow-float {
+  animation: slow-float 3s ease-in-out infinite;
+}
+
+.animate-slow-float-reverse {
+  animation: slow-float-reverse 3.5s ease-in-out infinite;
+}
+
+.animate-draw-line {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: draw-line 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-chart {
+  animation: fade-in-chart 1.8s ease-out forwards;
+}
+
 /* Hide scrollbars utility for touch sliders */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
