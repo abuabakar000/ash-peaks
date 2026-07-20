@@ -1,9 +1,47 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, ChevronUp } from "lucide-react";
+
+function RevealOnScroll({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.05,
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] transform ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function Footer() {
   const [isLinksOpen, setIsLinksOpen] = useState(false);
@@ -14,34 +52,60 @@ export default function Footer() {
     <footer className="w-full bg-black text-white border-t border-zinc-900">
       
       {/* 1. CTA Section */}
-      <div className="relative w-full border-b border-zinc-900 bg-black overflow-hidden py-24 sm:py-28">
-        {/* Background Image Layer */}
-        <div className="absolute inset-0 z-0 opacity-55">
+      <div className="relative w-full border-b border-zinc-900 bg-black overflow-hidden py-16 sm:py-20 lg:py-24">
+        {/* Background Image covering the whole section */}
+        <div className="absolute inset-0 z-0 opacity-45">
           <Image
-            src="/images/cta_background_texture.png"
-            alt="Dark digital network background"
+            src="/mtn-bg.png"
+            alt="Dark premium mountain peaks background"
             fill
+            priority
             sizes="100vw"
             className="object-cover pointer-events-none select-none"
           />
-          {/* Subtle gradient to fade into solid black at borders */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black" />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center flex flex-col items-center z-10">
-          <h2 className="text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] font-black tracking-tight leading-none mb-8 sm:mb-10 max-w-4xl select-none">
-            Ready To Start <br />
-            <span className="text-[#f59e0b]">Your Next Campaign?</span>
-          </h2>
-          
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold px-10 py-4.5 rounded-full shadow-lg shadow-[#f59e0b]/10 hover:shadow-xl hover:shadow-[#f59e0b]/20 transition-all duration-200 text-base"
-          >
-            Let&apos;s Get Started
-          </Link>
-        </div>
+        <RevealOnScroll>
+          <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-10 z-10 w-full">
+            
+            {/* Left Column: Heading & Subtitle */}
+            <div className="flex flex-col items-start text-left max-w-xl">
+              <span className="text-[10px] sm:text-[11px] font-extrabold tracking-[0.25em] text-[#1893b0] uppercase mb-3 select-none">
+                Take the Next Step
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black tracking-tight leading-[1.15] mb-3">
+                <span
+                  className="text-transparent select-none"
+                  style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.85)" }}
+                >
+                  Ready to Reach
+                </span>{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1893b0] via-[#38bdf8] to-[#1893b0] drop-shadow-[0_0_20px_rgba(24,147,176,0.3)]">
+                  New Heights?
+                </span>
+              </h2>
+              <p className="text-zinc-400 text-sm sm:text-[15.5px] font-semibold max-w-lg">
+                Let&apos;s grow your business &mdash; together. Contact us today to secure your custom marketing roadmap.
+              </p>
+            </div>
+
+            {/* Right Column: Strategy Call CTA Button */}
+            <div className="shrink-0 flex flex-col sm:flex-row items-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2.5 bg-[#1893b0] hover:bg-[#1893b0]/90 text-white font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-[#1893b0]/15 hover:shadow-[0_0_30px_rgba(24,147,176,0.4)] hover:scale-[1.02] transition-all duration-300 text-sm sm:text-base group select-none"
+              >
+                <span>Book Your Free Strategy Call</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </Link>
+            </div>
+
+          </div>
+        </RevealOnScroll>
       </div>
 
       {/* 2. Main Footer Link Grid */}
@@ -65,11 +129,11 @@ export default function Footer() {
             <div className="flex flex-col gap-5 text-sm text-zinc-400 font-medium w-full">
               <p className="flex flex-col gap-1">
                 <span className="text-xs font-black uppercase tracking-wider text-zinc-500">Phone</span>
-                <a href="tel:5713703427" className="text-white hover:text-[#f59e0b] transition-colors font-bold text-[15px]">(571) 370-3427</a>
+                <a href="tel:5713703427" className="text-white hover:text-[#1893b0] transition-colors font-bold text-[15px]">(571) 370-3427</a>
               </p>
               <p className="flex flex-col gap-1">
                 <span className="text-xs font-black uppercase tracking-wider text-zinc-500">Email</span>
-                <a href="mailto:info@qualityresourcellc.com" className="text-white hover:text-[#f59e0b] transition-colors font-bold text-[15px]">info@qualityresourcellc.com</a>
+                <a href="mailto:info@qualityresourcellc.com" className="text-white hover:text-[#1893b0] transition-colors font-bold text-[15px]">info@qualityresourcellc.com</a>
               </p>
               <p className="flex flex-col gap-1">
                 <span className="text-xs font-black uppercase tracking-wider text-zinc-500">Office Hours</span>
@@ -98,12 +162,12 @@ export default function Footer() {
               }`}
             >
               <ul className="flex flex-col gap-2.5 text-sm text-zinc-400 font-medium">
-                <li><Link href="/about" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">About Us</Link></li>
-                <li><Link href="/portfolio" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Portfolio</Link></li>
-                <li><Link href="/blog" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Our Blog</Link></li>
-                <li><Link href="/awards" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Our Awards</Link></li>
-                <li><Link href="/testimonials" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Testimonials</Link></li>
-                <li><Link href="/contact" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Contact Us</Link></li>
+                <li><Link href="/about" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">About Us</Link></li>
+                <li><Link href="/portfolio" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Portfolio</Link></li>
+                <li><Link href="/blog" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Our Blog</Link></li>
+                <li><Link href="/awards" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Our Awards</Link></li>
+                <li><Link href="/testimonials" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Testimonials</Link></li>
+                <li><Link href="/contact" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Contact Us</Link></li>
               </ul>
             </div>
           </div>
@@ -128,12 +192,12 @@ export default function Footer() {
               }`}
             >
               <ul className="flex flex-col gap-2.5 text-sm text-zinc-400 font-medium">
-                <li><Link href="/services/web-design" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Web Design & Dev</Link></li>
-                <li><Link href="/services/seo" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Website SEO</Link></li>
-                <li><Link href="/services/local-maps" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Local Maps Optimization</Link></li>
-                <li><Link href="/services/social-media" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">Social Media Marketing</Link></li>
-                <li><Link href="/services/ppc" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">PPC Management</Link></li>
-                <li><Link href="/services/app-dev" className="hover:text-[#f59e0b] hover:translate-x-1.5 transition-all duration-200 block">App Development</Link></li>
+                <li><Link href="/services/web-design" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Web Design & Dev</Link></li>
+                <li><Link href="/services/seo" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Website SEO</Link></li>
+                <li><Link href="/services/local-maps" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Local Maps Optimization</Link></li>
+                <li><Link href="/services/social-media" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">Social Media Marketing</Link></li>
+                <li><Link href="/services/ppc" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">PPC Management</Link></li>
+                <li><Link href="/services/app-dev" className="hover:text-[#1893b0] hover:translate-x-1.5 transition-all duration-200 block">App Development</Link></li>
               </ul>
             </div>
           </div>
@@ -178,7 +242,7 @@ export default function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#f59e0b] hover:border-[#f59e0b] hover:shadow-md hover:shadow-[#f59e0b]/5 transition-all duration-300"
+                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#1893b0] hover:border-[#1893b0] hover:shadow-md hover:shadow-[#1893b0]/5 transition-all duration-300"
                 aria-label="Facebook"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -189,7 +253,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#f59e0b] hover:border-[#f59e0b] hover:shadow-md hover:shadow-[#f59e0b]/5 transition-all duration-300"
+                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#1893b0] hover:border-[#1893b0] hover:shadow-md hover:shadow-[#1893b0]/5 transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -202,7 +266,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#f59e0b] hover:border-[#f59e0b] hover:shadow-md hover:shadow-[#f59e0b]/5 transition-all duration-300"
+                className="w-9 h-9 rounded-full border border-zinc-800 bg-zinc-950 flex items-center justify-center text-zinc-400 hover:text-[#1893b0] hover:border-[#1893b0] hover:shadow-md hover:shadow-[#1893b0]/5 transition-all duration-300"
                 aria-label="Instagram"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -257,9 +321,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-medium">
         <span>Quality Resource LLC © 2010 - 2026 All Rights Reserved.</span>
         <div className="flex gap-4">
-          <Link href="/terms" className="hover:text-[#f59e0b] transition-colors">Terms of Service</Link>
+          <Link href="/terms" className="hover:text-[#1893b0] transition-colors">Terms of Service</Link>
           <span>•</span>
-          <Link href="/privacy" className="hover:text-[#f59e0b] transition-colors">Privacy Policy</Link>
+          <Link href="/privacy" className="hover:text-[#1893b0] transition-colors">Privacy Policy</Link>
         </div>
       </div>
 

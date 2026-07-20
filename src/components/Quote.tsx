@@ -1,8 +1,46 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
+
+function RevealOnScroll({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.05,
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] transform ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function Quote() {
   const [formData, setFormData] = useState({
@@ -35,22 +73,32 @@ export default function Quote() {
     <section className="relative w-full bg-black py-16 sm:py-24 lg:py-28 overflow-hidden border-b border-zinc-900">
       
       {/* Exotic amber light leak background accent */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-radial from-[#f59e0b]/5 to-transparent rounded-full blur-3xl pointer-events-none select-none z-0" />
+      <div className="absolute top-0 left-0 w-80 h-80 bg-radial from-[#1893b0]/5 to-transparent rounded-full blur-3xl pointer-events-none select-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column: Copy & Info (7 cols width) */}
           <div className="lg:col-span-7 flex flex-col items-start w-full">
-            
+            <RevealOnScroll>
             {/* Header Title */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-white leading-tight mb-8">
-              Ready to take your <span className="text-[#f59e0b]">digital marketing</span> <br />
-              to the next level?
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black leading-tight mb-8">
+              <span
+                className="text-transparent select-none"
+                style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.85)" }}
+              >
+                Ready to take your
+              </span>{" "}
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1893b0] via-[#38bdf8] to-[#1893b0]">
+                digital marketing
+              </span>{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-zinc-400">
+                to the next level?
+              </span>
             </h2>
-
             {/* Tagline */}
-            <span className="text-xs sm:text-[13px] font-extrabold tracking-widest text-[#f59e0b] uppercase mb-7 select-none">
+            <span className="text-xs sm:text-[13px] font-extrabold tracking-widest text-[#1893b0] uppercase mb-7 select-none">
               We Guarantee You&apos;ll Leave With a Clear Understanding of:
             </span>
 
@@ -59,7 +107,7 @@ export default function Quote() {
               {checklist.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-4">
                   {/* Small Circular Check Indicator */}
-                  <div className="w-5.5 h-5.5 rounded-full bg-zinc-900 border border-zinc-800 text-[#f59e0b] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(245,158,11,0.08)]">
+                  <div className="w-5.5 h-5.5 rounded-full bg-zinc-900 border border-zinc-800 text-[#1893b0] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(245,158,11,0.08)]">
                     <Check className="w-3 h-3 stroke-[3]" />
                   </div>
                   <p className="text-sm sm:text-[15px] text-zinc-400 leading-relaxed font-medium">
@@ -79,7 +127,7 @@ export default function Quote() {
             </p>
 
             {/* Editorial pull quote */}
-            <div className="border-l-2 border-[#f59e0b] pl-4 my-6 max-w-xl">
+            <div className="border-l-2 border-[#1893b0] pl-4 my-6 max-w-xl">
               <p className="text-zinc-200 font-bold leading-relaxed text-[14.5px] sm:text-base">
                 &ldquo;As a marketing agency, we emphasize transparency and are committed to sharing our expertise, helping you navigate the path to online marketing success.&rdquo;
               </p>
@@ -92,17 +140,19 @@ export default function Quote() {
             {/* More About Us Outline Button */}
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-zinc-700 text-sm sm:text-base font-bold text-white bg-transparent hover:border-[#f59e0b] hover:text-[#f59e0b] transition-all duration-300 group"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-zinc-700 text-sm sm:text-base font-bold text-white bg-transparent hover:border-[#1893b0] hover:text-[#1893b0] transition-all duration-300 group"
             >
               <span>More About Us</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
 
+            </RevealOnScroll>
           </div>
 
           {/* Right Column: Request a Quote Form Card (5 cols width) */}
           <div className="lg:col-span-5 w-full">
-            <div className="bg-zinc-950/80 backdrop-blur-md border border-zinc-800/80 rounded-[32px] p-6 sm:p-8 md:p-10 shadow-2xl shadow-black/80 flex flex-col w-full">
+            <RevealOnScroll delay={150}>
+              <div className="bg-zinc-950/80 backdrop-blur-md border border-zinc-800/80 rounded-[32px] p-6 sm:p-8 md:p-10 shadow-2xl shadow-black/80 flex flex-col w-full">
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 tracking-tight">
                 Request a Free Quote
               </h3>
@@ -117,7 +167,7 @@ export default function Quote() {
                     placeholder="Business / Company Name *"
                     value={formData.companyName}
                     onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-all"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1893b0] focus:ring-1 focus:ring-[#1893b0]/50 transition-all duration-300 hover:border-zinc-700 focus:scale-[1.008] focus:shadow-[0_0_15px_rgba(24,147,176,0.1)]"
                   />
                 </div>
 
@@ -129,7 +179,7 @@ export default function Quote() {
                     placeholder="First Name *"
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-all"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1893b0] focus:ring-1 focus:ring-[#1893b0]/50 transition-all duration-300 hover:border-zinc-700 focus:scale-[1.008] focus:shadow-[0_0_15px_rgba(24,147,176,0.1)]"
                   />
                   <input
                     type="text"
@@ -137,7 +187,7 @@ export default function Quote() {
                     placeholder="Last Name *"
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-all"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1893b0] focus:ring-1 focus:ring-[#1893b0]/50 transition-all duration-300 hover:border-zinc-700 focus:scale-[1.008] focus:shadow-[0_0_15px_rgba(24,147,176,0.1)]"
                   />
                 </div>
 
@@ -149,7 +199,7 @@ export default function Quote() {
                     placeholder="Phone *"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-all"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1893b0] focus:ring-1 focus:ring-[#1893b0]/50 transition-all duration-300 hover:border-zinc-700 focus:scale-[1.008] focus:shadow-[0_0_15px_rgba(24,147,176,0.1)]"
                   />
                   <input
                     type="email"
@@ -157,7 +207,7 @@ export default function Quote() {
                     placeholder="Email *"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-all"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1893b0] focus:ring-1 focus:ring-[#1893b0]/50 transition-all duration-300 hover:border-zinc-700 focus:scale-[1.008] focus:shadow-[0_0_15px_rgba(24,147,176,0.1)]"
                   />
                 </div>
 
@@ -169,7 +219,7 @@ export default function Quote() {
                     placeholder="Website URL *"
                     value={formData.websiteUrl}
                     onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
-                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-all"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1893b0] focus:ring-1 focus:ring-[#1893b0]/50 transition-all duration-300 hover:border-zinc-700 focus:scale-[1.008] focus:shadow-[0_0_15px_rgba(24,147,176,0.1)]"
                   />
                 </div>
 
@@ -179,7 +229,7 @@ export default function Quote() {
                     required
                     value={formData.serviceNeeded}
                     onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
-                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-zinc-300 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-all appearance-none cursor-pointer"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-zinc-350 focus:outline-none focus:border-[#1893b0] focus:ring-1 focus:ring-[#1893b0]/50 transition-all duration-300 hover:border-zinc-700 focus:scale-[1.008] focus:shadow-[0_0_15px_rgba(24,147,176,0.1)] appearance-none cursor-pointer"
                   >
                     <option value="" disabled className="bg-zinc-950 text-zinc-500">What services do you need? *</option>
                     <option value="web-dev" className="bg-zinc-950 text-white">Website Design & Development</option>
@@ -205,7 +255,7 @@ export default function Quote() {
                     placeholder="What's your monthly marketing budget, and what goals do you want to achieve? *"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#f59e0b] focus:ring-1 focus:ring-[#f59e0b] transition-all h-[110px] resize-none"
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl p-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1893b0] focus:ring-1 focus:ring-[#1893b0]/50 transition-all duration-300 hover:border-zinc-700 focus:scale-[1.008] focus:shadow-[0_0_15px_rgba(24,147,176,0.1)] h-[110px] resize-none"
                   />
                 </div>
 
@@ -217,11 +267,11 @@ export default function Quote() {
                     required
                     checked={formData.consent}
                     onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                    className="mt-1 w-4 h-4 text-[#f59e0b] border-zinc-800 bg-zinc-900 focus:ring-[#f59e0b] cursor-pointer"
+                    className="mt-1 w-4 h-4 text-[#1893b0] border-zinc-800 bg-zinc-900 focus:ring-[#1893b0] cursor-pointer"
                   />
                   <label htmlFor="consent" className="ml-3 text-[11px] sm:text-xs text-zinc-400 leading-normal font-medium cursor-pointer">
                     By providing a telephone number and submitting the form of QRG, you are consenting to be contacted by SMS text message and agreeing to our{" "}
-                    <Link href="/privacy" className="text-[#f59e0b] underline font-bold hover:text-[#d97706]">
+                    <Link href="/privacy" className="text-[#1893b0] underline font-bold hover:text-[#d97706]">
                       Privacy Policy
                     </Link>.
                   </label>
@@ -230,13 +280,14 @@ export default function Quote() {
                 {/* Submit button */}
                 <button
                   type="submit"
-                  className="w-full mt-4 bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold py-4 px-6 rounded-full text-sm sm:text-base transition-colors duration-200 cursor-pointer shadow-md shadow-[#f59e0b]/10 hover:shadow-lg hover:shadow-[#f59e0b]/20"
+                  className="w-full mt-4 bg-[#1893b0] hover:bg-[#d97706] text-white font-bold py-4 px-6 rounded-full text-sm sm:text-base transition-colors duration-200 cursor-pointer shadow-md shadow-[#1893b0]/10 hover:shadow-lg hover:shadow-[#1893b0]/20"
                 >
                   Request My Free Quote
                 </button>
 
               </form>
-            </div>
+              </div>
+            </RevealOnScroll>
           </div>
 
         </div>

@@ -29,7 +29,7 @@ export default function RootLayout({
       lang="en"
       className={`${publicSans.variable} ${meowScript.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-slate-900 font-sans">
+      <body className="min-h-full flex flex-col bg-background text-slate-900 font-sans">
         {children}
       </body>
     </html>

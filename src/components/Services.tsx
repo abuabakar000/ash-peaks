@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 interface ServiceItem {
   number: string;
@@ -133,57 +134,70 @@ export default function Services() {
   ];
 
   return (
-    <section className="relative w-full bg-white py-20 sm:py-24 lg:py-28 overflow-hidden border-b border-slate-100">
+    <section className="relative w-full bg-background py-20 sm:py-24 lg:py-28 overflow-hidden border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col items-start">
         
         {/* Top Header Text Content */}
         <RevealRow className="w-full mb-16 lg:mb-20">
-          <h2 className="text-3xl sm:text-[40px] md:text-[46px] lg:text-[50px] font-bold text-slate-950 leading-[1.25] tracking-tight max-w-4xl select-none">
-            It&apos;s so challenging to find a good team to do great things. But we can provide you the best one.
+          <h2 className="text-3xl sm:text-[40px] md:text-[46px] lg:text-[50px] font-black leading-[1.25] tracking-tight max-w-4xl select-none">
+            <span
+              className="text-transparent select-none"
+              style={{ WebkitTextStroke: "1.5px #0f172a" }}
+            >
+              It&apos;s challenging to find a good team.
+            </span>{" "}
+            <br className="hidden sm:inline" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-slate-950 to-slate-700">
+              But we provide
+            </span>{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1893b0] via-[#38bdf8] to-[#1893b0]">
+              the best one.
+            </span>
           </h2>
         </RevealRow>
 
+
         {/* Services Rows List */}
-        <div className="w-full flex flex-col border-b border-slate-200">
+        <div className="w-full flex flex-col gap-4.5">
           {services.map((service, idx) => (
-            <RevealRow key={idx}>
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 py-7 sm:py-8 border-t border-slate-200 items-center group cursor-pointer transition-all duration-300">
+            <RevealRow key={idx} className="w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 py-6 px-5 sm:px-7 border border-slate-200/50 rounded-2xl bg-white/40 backdrop-blur-sm items-center group cursor-pointer transition-all duration-500 hover:bg-white hover:border-[#1893b0]/35 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#1893b0]/4">
                 
                 {/* Left Area (Number + Icon + Title) */}
-                <div className="lg:col-span-6 flex items-center gap-6 sm:gap-8">
+                <div className="lg:col-span-6 flex items-center gap-5 sm:gap-6">
                   {/* Number */}
-                  <span className="text-[13px] sm:text-sm font-bold text-slate-400 tracking-wider w-6 select-none">
+                  <span className="text-[12px] font-mono font-bold text-slate-400 tracking-wider w-6 select-none">
                     {service.number}
                   </span>
                   
-                  {/* Icon Wrapper (Constantly floating in amber with staggered delays) */}
-                  <div
-                    className="text-[#f59e0b] shrink-0 animate-slow-float"
-                    style={{
-                      animationDelay: `${idx * 0.4}s`
-                    }}
-                  >
+                  {/* Icon Wrapper: Sleek circle that glows, expands, and rotates the icon on row hover */}
+                  <div className="w-11 h-11 rounded-xl bg-[#e1e5e8]/50 text-slate-600 group-hover:bg-[#1893b0] group-hover:text-white group-hover:shadow-md group-hover:shadow-[#1893b0]/20 flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12">
                     {service.icon}
                   </div>
 
                   {/* Title & Badge */}
                   <div className="flex items-center flex-wrap gap-3">
-                    <h3 className="text-lg sm:text-[22px] font-bold text-slate-700 group-hover:text-black transition-colors duration-300 leading-none">
+                    <h3 className="text-lg sm:text-[21px] font-bold text-slate-800 group-hover:text-slate-950 transition-colors duration-300 leading-none">
                       {service.title}
                     </h3>
                     {service.isPopular && (
-                      <span className="bg-[#f59e0b] text-white text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded select-none">
+                      <span className="bg-[#1893b0] text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded select-none">
                         Popular
                       </span>
                     )}
                   </div>
                 </div>
 
-                {/* Right Area (Description) */}
-                <div className="lg:col-span-6">
-                  <p className="text-[13px] sm:text-[14px] text-slate-900 font-medium leading-relaxed lg:pl-10">
+                {/* Right Area (Description + Action Arrow) */}
+                <div className="lg:col-span-6 flex items-center justify-between gap-4 lg:pl-10">
+                  <p className="text-[13.5px] sm:text-[14.5px] text-black font-medium leading-relaxed text-left">
                     {service.description}
                   </p>
+                  
+                  {/* Floating Action Arrow */}
+                  <div className="text-slate-300 group-hover:text-[#1893b0] shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
+                    <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
+                  </div>
                 </div>
 
               </div>

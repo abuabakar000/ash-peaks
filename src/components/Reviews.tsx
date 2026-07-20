@@ -77,9 +77,17 @@ export default function Reviews() {
         <RevealContainer className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16 sm:mb-20">
           {/* Left Title */}
           <div className="lg:col-span-6">
-            <h2 className="text-3xl sm:text-4xl md:text-[50px] font-black text-white leading-tight tracking-tight">
-              Real Reviews, <br />
-              <span className="text-[#f59e0b]">Real Clients</span>
+            <h2 className="text-3xl sm:text-4xl md:text-[50px] font-black leading-tight tracking-tight">
+              <span
+                className="text-transparent select-none"
+                style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.85)" }}
+              >
+                Real Reviews,
+              </span>{" "}
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1893b0] via-[#38bdf8] to-[#1893b0]">
+                Real Clients
+              </span>
             </h2>
           </div>
           
@@ -101,7 +109,7 @@ export default function Reviews() {
               key={idx}
               className="w-[285px] sm:w-[320px] md:w-auto shrink-0 snap-center h-full flex"
             >
-              <div className="w-full bg-zinc-950/70 border border-zinc-800/40 rounded-[20px] p-6 sm:p-8 flex flex-col justify-between h-full transition-all duration-300 hover:border-[#f59e0b]/30">
+              <div className="w-full bg-zinc-950/70 border border-zinc-800/40 rounded-[20px] p-6 sm:p-8 flex flex-col justify-between h-full transition-all duration-300 hover:border-[#1893b0]/30">
                 
                 {/* Header Content */}
                 <div className="w-full">
@@ -119,7 +127,7 @@ export default function Reviews() {
                           key={i}
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          className="w-3.5 h-3.5 text-[#f59e0b]"
+                          className="w-3.5 h-3.5 text-[#1893b0]"
                         >
                           <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                         </svg>
@@ -127,7 +135,7 @@ export default function Reviews() {
                     </div>
 
                     {/* Verified badge */}
-                    <span className="text-[10px] font-extrabold tracking-widest text-[#f59e0b] uppercase select-none">
+                    <span className="text-[10px] font-extrabold tracking-widest text-[#1893b0] uppercase select-none">
                       Verified Client
                     </span>
 

@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { Check } from "lucide-react";
 
 function RevealOnScroll({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -44,197 +43,111 @@ function RevealOnScroll({ children, delay = 0 }: { children: React.ReactNode; de
 }
 
 export default function Plans() {
-  const [activeTab, setActiveTab] = useState<number | null>(null);
-
-  const toggleTab = (idx: number) => {
-    setActiveTab(activeTab === idx ? null : idx);
-  };
-
-  const tabs = [
-    {
-      title: "Your Goals, Our Strategy",
-      content: [
-        "Our team of specialists will develop a digital marketing strategy that’s perfectly aligned with your business goals. With years of experience and a proven track record, we have the expertise to effectively market your brand and drive results.",
-        "We don’t settle for generic, “B-grade” solutions. Instead, we take a personalized approach, carefully crafting campaigns that are built on a deep understanding of your objectives."
-      ]
-    },
-    {
-      title: "Ongoing Optimization & Analytics",
-      content: [
-        "Digital landscapes change rapidly. We monitor campaign performance daily, adjusting bidding, keyword targeting, and ad copy in real-time to maximize efficiency.",
-        "Through transparent, live dashboard reporting, you always see precisely where your marketing spend is generating the highest return on investment."
-      ]
-    },
-    {
-      title: "Scale & Market Expansion",
-      content: [
-        "Once your local baseline is profitable and converting steadily, we map out expansion strategies to target adjacent regional or national audiences.",
-        "Through structured search campaigns and custom funnel scaling, we help your business capture new market share predictably."
-      ]
-    }
+  const bullets = [
+    "Results-driven strategies tailored to your business",
+    "Transparent communication and reporting",
+    "Dedicated team focused on your growth",
+    "Proven process that delivers real, measurable results"
   ];
 
   return (
-    <section className="relative w-full bg-white py-20 sm:py-28 overflow-hidden border-b border-slate-100">
+    <section className="relative w-full bg-gradient-to-r from-background via-background to-white py-20 sm:py-28 overflow-hidden border-b border-slate-100">
       
       {/* Decorative soft ambient gradient background blob */}
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-radial from-[#f59e0b]/5 to-transparent rounded-full blur-3xl pointer-events-none select-none z-0" />
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-radial from-[#1893b0]/5 to-transparent rounded-full blur-3xl pointer-events-none select-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Image Grid */}
-          <div className="lg:col-span-6 w-full">
+          {/* Left Column: Copy Details */}
+          <div className="lg:col-span-6 flex flex-col items-start text-left w-full lg:pr-8 xl:pr-12">
             <RevealOnScroll>
-              <div className="flex flex-col gap-5 sm:gap-6">
-                {/* Top Large Image */}
-                <div className="relative w-full h-[260px] sm:h-[340px] rounded-[32px] overflow-hidden border border-slate-100/60 shadow-[0_24px_50px_-15px_rgba(0,0,0,0.06)] group hover:shadow-[0_24px_50px_-15px_rgba(245,158,11,0.06)] transition-all duration-300">
-                  <Image
-                    src="/images/charts_presentation.png"
-                    alt="Presentation charts and report"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
-                  />
-                </div>
-
-                {/* Bottom Two Images */}
-                <div className="grid grid-cols-2 gap-5 sm:gap-6">
-                  {/* Bottom Left Image */}
-                  <div className="relative h-[180px] sm:h-[230px] rounded-[24px] overflow-hidden border border-slate-100/60 shadow-[0_24px_50px_-15px_rgba(0,0,0,0.06)] group hover:shadow-[0_24px_50px_-15px_rgba(245,158,11,0.06)] transition-all duration-300">
-                    <Image
-                      src="/images/charts_team.png"
-                      alt="Business team discussing charts"
-                      fill
-                      sizes="(max-width: 1024px) 50vw, 20vw"
-                      className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
-                    />
-                  </div>
-
-                  {/* Bottom Right Image */}
-                  <div className="relative h-[180px] sm:h-[230px] rounded-[24px] overflow-hidden border border-slate-100/60 shadow-[0_24px_50px_-15px_rgba(0,0,0,0.06)] group hover:shadow-[0_24px_50px_-15px_rgba(245,158,11,0.06)] transition-all duration-300">
-                    <Image
-                      src="/images/analytics_dashboard_neutral.png"
-                      alt="Marketing analytics dashboard"
-                      fill
-                      sizes="(max-width: 1024px) 50vw, 20vw"
-                      className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
-                    />
-                  </div>
-                </div>
-              </div>
-            </RevealOnScroll>
-          </div>
-
-          {/* Right Column: Copy & Accordion */}
-          <div className="lg:col-span-6 w-full">
-            <RevealOnScroll delay={150}>
-              <div className="flex flex-col items-start w-full">
-                {/* Tagline */}
-                <span className="text-xs sm:text-[13px] font-extrabold tracking-widest text-[#f59e0b] uppercase mb-4 select-none">
-                  A team of specialists... not generalists
+              
+              {/* Tagline */}
+              <span className="text-xs sm:text-[13px] font-extrabold tracking-widest text-[#1893b0] uppercase mb-4 select-none">
+                Why Choose Ash Peaks
+              </span>
+              
+              {/* Heading */}
+              <h2 className="text-[32px] sm:text-4xl lg:text-[45px] font-black leading-[1.1] tracking-tight mb-6">
+                <span
+                  className="text-transparent select-none"
+                  style={{ WebkitTextStroke: "1.5px #0f172a" }}
+                >
+                  More Than Marketers,
+                </span>{" "}
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-900 to-slate-700">
+                  We&apos;re
+                </span>{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1893b0] via-[#38bdf8] to-[#1893b0]">
+                  Growth Partners.
                 </span>
-                
-                {/* Heading */}
-                <h2 className="text-[32px] sm:text-4xl lg:text-[45px] font-black text-slate-950 leading-[1.1] tracking-tight mb-8">
-                  Unique plans designed for you, not for the masses.
-                </h2>
-                
-                {/* Refined Description Paragraph */}
-                <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-semibold mb-8">
-                  At Quality Resource LLC, we don&apos;t believe in one-size-fits-all templates. Our team takes the time to understand your unique business architecture and craft bespoke strategies that foster real, sustainable growth.
-                </p>
-     
-                {/* Core Pillars List */}
-                <div className="flex flex-col gap-6 mb-10 w-full">
-                  {[
-                    { title: "Bespoke Campaign Strategy", desc: "Every metric and keyword choice is custom-engineered for your specific target market." },
-                    { title: "In-House Specialists Only", desc: "No outsourcing. Our full-time local specialists maintain complete oversight of your project." },
-                    { title: "Performance-Backed Execution", desc: "We focus strictly on key metrics that drive conversions and increase your ROI." }
-                  ].map((pillar, idx) => (
-                    <div key={idx} className="flex items-start gap-4">
-                      {/* Circular Check Indicator */}
-                      <div className="w-6 h-6 rounded-full bg-[#f59e0b]/10 border border-[#f59e0b]/20 flex items-center justify-center shrink-0 mt-0.5 text-[#f59e0b]">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" className="w-2.5 h-2.5">
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-[15px] sm:text-base font-bold text-slate-950 leading-tight mb-1">{pillar.title}</span>
-                        <span className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">{pillar.desc}</span>
-                      </div>
+              </h2>
+              
+              {/* Description Paragraph */}
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-semibold mb-8 max-w-lg">
+                We combine strategy, creativity, and analytics to deliver measurable growth. Your success is our mission.
+              </p>
+   
+              {/* Core Pillars List */}
+              <div className="flex flex-col gap-4.5 w-full">
+                {bullets.map((bullet, idx) => (
+                  <div key={idx} className="flex items-start gap-3.5">
+                    {/* Circular Check Indicator */}
+                    <div className="w-5 h-5 rounded-full bg-[#1893b0] flex items-center justify-center shrink-0 mt-0.5 text-white">
+                      <Check className="w-3.5 h-3.5 stroke-[3.5]" />
                     </div>
-                  ))}
+                    <span className="text-[14.5px] sm:text-[16px] font-bold text-slate-700 leading-snug">
+                      {bullet}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+            </RevealOnScroll>
+          </div>
+
+          {/* Right Column: Desk Setup Mockup Image */}
+          <div className="lg:col-span-6 w-full flex justify-center lg:justify-end z-0">
+            <RevealOnScroll delay={150}>
+              <div className="relative w-[115%] lg:w-[130%] max-w-none h-auto lg:-mr-16 xl:-mr-36 transition-all duration-300">
+                <Image
+                  src="/images/ashp.png"
+                  alt="Ash Peaks Analytics Dashboard Mockup"
+                  width={850}
+                  height={585}
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="w-full h-auto object-contain select-none pointer-events-none"
+                />
+
+                {/* Floating Glassmorphic Metric Card 1 */}
+                <div className="absolute top-[28%] left-[8%] bg-white/80 backdrop-blur-md border border-white/90 rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-slate-300/15 z-20 flex items-center gap-2.5 select-none pointer-events-none animate-slow-float">
+                  <div className="w-8 h-8 rounded-full bg-[#1893b0]/10 flex items-center justify-center text-[#1893b0] shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                  </div>
+                  <div className="flex flex-col text-left">
+                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider leading-none mb-0.5">Average ROI</span>
+                    <span className="text-sm font-black text-slate-900 leading-none">+240%</span>
+                  </div>
                 </div>
-                
-                {/* Interactive Strategy Accordion Tabs Stack */}
-                <div className="flex flex-col gap-4.5 w-full">
-                  {tabs.map((tab, idx) => {
-                    const isTabOpen = activeTab === idx;
-                    return (
-                      <div
-                        key={idx}
-                        className={`w-full border rounded-2xl p-5 transition-all duration-300 ${
-                          isTabOpen
-                            ? "bg-white border-[#f59e0b]/30 shadow-md shadow-[#f59e0b]/5"
-                            : "bg-slate-50/70 border-slate-100 hover:bg-slate-100/50"
-                        }`}
-                      >
-                        <button
-                          onClick={() => toggleTab(idx)}
-                          className="w-full flex items-center justify-between text-slate-950 font-bold text-sm sm:text-base hover:text-[#f59e0b] transition-colors duration-200 cursor-pointer select-none"
-                        >
-                          <span>{tab.title}</span>
-                          <div
-                            className={`w-7 h-7 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${
-                              isTabOpen
-                                ? "bg-[#f59e0b] border-[#f59e0b] text-white"
-                                : "border-slate-200 text-slate-900"
-                            }`}
-                          >
-                            <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-300 ${
-                                isTabOpen ? "rotate-180" : "rotate-0"
-                              }`}
-                            />
-                          </div>
-                        </button>
-                        
-                        <div
-                          className={`transition-all duration-300 overflow-hidden ${
-                            isTabOpen ? "max-h-[300px] mt-4 opacity-100" : "max-h-0 opacity-0"
-                          }`}
-                        >
-                          <div className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium flex flex-col gap-3">
-                            {tab.content.map((p, pIdx) => (
-                              <p key={pIdx}>{p}</p>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+
+                {/* Floating Glassmorphic Metric Card 2 */}
+                <div className="absolute bottom-[24%] right-[2%] bg-white/80 backdrop-blur-md border border-white/90 rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-slate-300/15 z-20 flex items-center gap-2.5 select-none pointer-events-none animate-slow-float-reverse">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                  </div>
+                  <div className="flex flex-col text-left">
+                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider leading-none mb-0.5">New Leads</span>
+                    <span className="text-sm font-black text-slate-900 leading-none">+32.5%</span>
+                  </div>
                 </div>
               </div>
             </RevealOnScroll>
           </div>
 
         </div>
-
-        {/* Centered CTA Button at bottom of section */}
-        <div className="w-full flex justify-center mt-20 sm:mt-24">
-          <RevealOnScroll delay={250}>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2.5 px-10 py-4.5 rounded-full bg-slate-950 text-white font-bold text-base hover:bg-neutral-800 transition-all duration-300 shadow-lg shadow-slate-950/10 hover:shadow-slate-950/20 group"
-            >
-              <span>Ready to Start a Conversation?</span>
-              <ArrowRight className="w-4.5 h-4.5 transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
-          </RevealOnScroll>
-        </div>
-
       </div>
     </section>
   );
